@@ -294,6 +294,12 @@ static int is_solaris (void)
         return (stat ("/etc/release", &st)   == 0);
 }
 
+static int is_amazon (void)
+{
+        struct stat st;
+        return (stat ("/etc/system-release", &st)   == 0);
+}
+
 static int is_common (void)
 {
         return (1);
@@ -313,6 +319,7 @@ const distro_tbl_t distro_tbl[] = {
         { &is_mandriva, &get_runlevel_mandriva },
         { &is_suse,     &get_runlevel_suse     },
         { &is_solaris,  &get_runlevel_sysv     },
+        { &is_amazon,   &get_runlevel_sysv     },
         { &is_common,   &get_runlevel_common   }
 };
 
